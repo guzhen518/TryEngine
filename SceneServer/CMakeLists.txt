@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.6)
+PROJECT(TryServer)
+ADD_SUBDIRECTORY(public)
+ADD_SUBDIRECTORY(share)
+ADD_SUBDIRECTORY(tools)
+ADD_SUBDIRECTORY(utils)

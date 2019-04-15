@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 2.6)
+PROJECT(TryEngine)
+##ADD_SUBDIRECTORY(public)
+ADD_SUBDIRECTORY(Common)
+##ADD_SUBDIRECTORY(tools)
+##ADD_SUBDIRECTORY(utils)
+
+##ADD_SUBDIRECTORY(AIServer)
+##ADD_SUBDIRECTORY(SceneServer)
+##ADD_SUBDIRECTORY(PlatformSever)
+##ADD_SUBDIRECTORY(DBServer)
+##ADD_SUBDIRECTORY(RoomServer)
+##ADD_SUBDIRECTORY(WorldServer)
