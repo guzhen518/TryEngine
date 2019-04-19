@@ -9,7 +9,6 @@
 
 set(SOURCES_files_Common_Files
     ../Common/Timer.h
-	../Common/Macros.h
 	)
 
 source_group("Common Files" FILES ${SOURCES_files_Common_Files})

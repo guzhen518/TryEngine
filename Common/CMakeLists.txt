@@ -10,6 +10,7 @@
     set(SOURCES_files_SourceFiles
 		mempool.cpp
 		memsafety.cpp
+		Timer.cpp
     )
     source_group("Source Files" FILES ${SOURCES_files_SourceFiles})
 
@@ -20,6 +21,8 @@
     set(SOURCES_files_HeadFiles
 		mempool.h
 		memsafety.h
+		Timer.h
+		Macros.h
     )
     source_group("Head Files" FILES ${SOURCES_files_HeadFiles})
 
