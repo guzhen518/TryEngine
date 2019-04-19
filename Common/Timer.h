@@ -8,8 +8,15 @@ typedef int(__stdcall* LOGIC_TIMER_FUNC)(void* pContext, int64_t nId, unsigned i
 class CTimer
 {
 public:
+	CTimer(void* pContext);
+	~CTimer();
+public:
+	bool Add();
 
-protected:
+private:
+	CTimer();
+	CTimer(const CTimer&);
+	CTimer& operator= (const CTimer&);
 
 private:
 	struct timer_data_t 
@@ -18,6 +25,10 @@ private:
 		timer_data_t* pNext;	//双向链表 -后指针
 	
 		LOGIC_TIMER_FUNC func;
+
+		int nCount;			//次数
+		int nMaxCount;		//触发次数
+		bool bDelete;		//是否删除
 
 	};
 
