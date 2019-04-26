@@ -1,39 +1,45 @@
-#ifndef _LIB_COMMON_TIMER_H_
-#define  _LIB_COMMON_TIMER_H_
+#ifndef		_LIB_COMMON_LINK_LIST_H_
+#define		_LIB_COMMON_LINK_LIST_H_
 
 #include "Macros.h"
 
-typedef int(__stdcall* LOGIC_TIMER_FUNC)(void* pContext, int64_t nId, unsigned int nTime);
 
-class CTimer
+struct LinkNode 
+{
+	LinkNode()
+	{
+		nData = 0;
+	}
+
+	LinkNode(int value)
+	{
+		nData = nData;
+		pNext = NULL;
+	}
+
+	LinkNode* pNext;
+	int nData;
+};
+
+class CLinkList
 {
 public:
-	CTimer(void* pContext);
-	~CTimer();
+	CLinkList();
+	~CLinkList();
+
 public:
-	bool Add();
-
+	LinkNode* CreateNode(int nData);
+	bool AddNode(int nData);
+	bool RemoveNode(int nKey);
+	bool RemoveNode(LinkNode* pRemoveNode);
+	LinkNode* ReverseNode(LinkNode* pNode);
+	LinkNode* GetNodeByK(int k);
+	bool	HasCircle(LinkNode* pHead, LinkNode*& pCirNode);
 
 private:
-	CTimer();
-	CTimer(const CTimer&);
-	CTimer& operator= (const CTimer&);
-
-private:
-	struct timer_data_t 
-	{
-		timer_data_t* pPrev;	//双向链表 -前指针
-		timer_data_t* pNext;	//双向链表 -后指针
-	
-		LOGIC_TIMER_FUNC func;
-
-		int nCount;			//次数
-		int nMaxCount;		//触发次数
-		bool bDelete;		//是否删除
-
-	};
+	LinkNode* m_pLinkRoot;
 
 };
 
 
-#endif //_LIB_COMMON_TIMER_H_
+#endif //_LIB_COMMON_LINK_LIST_H_

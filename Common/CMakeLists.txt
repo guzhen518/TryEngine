@@ -11,6 +11,7 @@
 		mempool.cpp
 		memsafety.cpp
 		Timer.cpp
+		TryLinkList.cpp
     )
     source_group("Source Files" FILES ${SOURCES_files_SourceFiles})
 
@@ -23,6 +24,7 @@
 		memsafety.h
 		Timer.h
 		Macros.h
+		TryLinkList.h
     )
     source_group("Head Files" FILES ${SOURCES_files_HeadFiles})
 
