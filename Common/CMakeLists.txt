@@ -8,10 +8,12 @@
 ## --------------------------------------------------------------------
 
     set(SOURCES_files_SourceFiles
+		Debug.cpp
 		mempool.cpp
 		memsafety.cpp
 		Timer.cpp
 		TryLinkList.cpp
+		
     )
     source_group("Source Files" FILES ${SOURCES_files_SourceFiles})
 
@@ -20,11 +22,13 @@
     )
 
     set(SOURCES_files_HeadFiles
+		Macros.h
+		Debug.h
 		mempool.h
 		memsafety.h
 		Timer.h
-		Macros.h
 		TryLinkList.h
+		
     )
     source_group("Head Files" FILES ${SOURCES_files_HeadFiles})
 

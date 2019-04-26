@@ -12,7 +12,8 @@ public:
 	~CTimer();
 public:
 	bool Add();
-
+	bool Remove();
+	void Run();
 
 private:
 	CTimer();

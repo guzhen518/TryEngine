@@ -35,7 +35,9 @@ public:
 	LinkNode* ReverseNode(LinkNode* pNode);
 	LinkNode* GetNodeByK(int k);
 	bool	HasCircle(LinkNode* pHead, LinkNode*& pCirNode);
+	LinkNode* FindLoopNode();
 
+	LinkNode* GetMiddleNode();
 private:
 	LinkNode* m_pLinkRoot;
 
