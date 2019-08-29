@@ -10,6 +10,10 @@ class CTimer
 public:
 	CTimer(void* pContext);
 	~CTimer();
+
+private:
+	class CTimerHash;
+
 public:
 	bool Add();
 	bool Remove();

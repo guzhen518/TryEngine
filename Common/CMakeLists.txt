@@ -1,8 +1,8 @@
 ## --------------------------------------------------------------------
 ## 文件名:    CMakeLists.txt
-## 内  容:    public目录
-## 说  明:    libPublic工程管理文件
-## 创建日期:  2012年11月22日	
+## 内  容:    
+## 说  明:    
+## 创建日期:  
 ## 创建人:    
 ## 版权所有:  
 ## --------------------------------------------------------------------
@@ -13,6 +13,7 @@
 		memsafety.cpp
 		Timer.cpp
 		TryLinkList.cpp
+		../Net/SocketOpt.cpp
 		
     )
     source_group("Source Files" FILES ${SOURCES_files_SourceFiles})
@@ -28,6 +29,7 @@
 		memsafety.h
 		Timer.h
 		TryLinkList.h
+		../Net/SocketOpt.h
 		
     )
     source_group("Head Files" FILES ${SOURCES_files_HeadFiles})
