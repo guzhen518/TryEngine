@@ -9,8 +9,6 @@
 
     set(SOURCES_files_SourceFiles
 		Debug.cpp
-		mempool.cpp
-		memsafety.cpp
 		Timer.cpp
 		TryLinkList.cpp
 		../Net/SocketOpt.cpp
@@ -25,8 +23,6 @@
     set(SOURCES_files_HeadFiles
 		Macros.h
 		Debug.h
-		mempool.h
-		memsafety.h
 		Timer.h
 		TryLinkList.h
 		../Net/SocketOpt.h
