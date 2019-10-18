@@ -11,6 +11,7 @@
 		Debug.cpp
 		Timer.cpp
 		TryLinkList.cpp
+		TryStack.cpp
 		../Net/SocketOpt.cpp
 		
     )
@@ -25,6 +26,7 @@
 		Debug.h
 		Timer.h
 		TryLinkList.h
+		TryStack.cpp
 		../Net/SocketOpt.h
 		
     )

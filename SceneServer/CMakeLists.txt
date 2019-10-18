@@ -8,8 +8,11 @@
 ## --------------------------------------------------------------------
 
     set(SOURCES_files_SourceFiles
-		CellFactory.h
-		CellObject.h
+		AoiEntity.cpp
+		AoiManager.cpp
+		GameScene.cpp
+		SceneEntity.cpp
+		SceneManager.cpp
 		
     )
     source_group("Source Files" FILES ${SOURCES_files_SourceFiles})
@@ -19,8 +22,12 @@
     )
 
     set(SOURCES_files_HeadFiles
-		CellFactory.h
-		CellObject.h
+		Application.h
+		AoiEntity.h
+		AoiManager.h
+		GameScene.h
+		SceneEntity.h
+		SceneManager.h
 		
     )
     source_group("Head Files" FILES ${SOURCES_files_HeadFiles})
