@@ -9,10 +9,14 @@
 
     set(SOURCES_files_SourceFiles
 		Debug.cpp
+		TryLog.h
 		Timer.cpp
 		TryLinkList.cpp
 		TryStack.cpp
 		../Net/SocketOpt.cpp
+		../Net/CAcceptor.cpp
+		../Net/CConnector.cpp
+		../Net/TcpServer.cpp
 		
     )
     source_group("Source Files" FILES ${SOURCES_files_SourceFiles})
@@ -28,6 +32,9 @@
 		TryLinkList.h
 		TryStack.cpp
 		../Net/SocketOpt.h
+		../Net/CAcceptor.h
+		../Net/CConnector.h
+		../Net/TcpServer.h
 		
     )
     source_group("Head Files" FILES ${SOURCES_files_HeadFiles})
@@ -41,12 +48,17 @@
     ${SOURCES_HeadFiles}
   )
 
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/lib)
+
   if(WIN32)	
    SET(CMAKE_CXX_FLAGS_DEBUG "/MTd /Z7 /Od")
    SET(CMAKE_CXX_FLAGS_RELEASE "/MT /O2")
    SET(CMAKE_CXX_FLAGS_MINSIZEREL "/MT /O2")
    SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/MTd /Z7 /Od")
 endif(WIN32)
+
+ADD_DEPENDENCIES(${ProjectName} log4cplusSD)
+TARGET_LINK_LIBRARIES(${ProjectName} log4cplusSD)
 
 SET(ProjectName libCommon)
 SET(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
