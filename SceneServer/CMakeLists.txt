@@ -1,4 +1,4 @@
-## --------------------------------------------------------------------
+﻿## --------------------------------------------------------------------
 ## 文件名:    CMakeLists.txt
 ## 内  容:    public目录
 ## 说  明:    libPublic工程管理文件
@@ -15,6 +15,7 @@
 		SceneManager.cpp
 		SceneServer.cpp
 		
+		
     )
     source_group("Source Files" FILES ${SOURCES_files_SourceFiles})
 
@@ -29,6 +30,8 @@
 		GameScene.h
 		SceneEntity.h
 		SceneManager.h
+		../Common/TryLog.h
+		
 		
     )
     source_group("Head Files" FILES ${SOURCES_files_HeadFiles})
@@ -62,9 +65,6 @@ MESSAGE(STATUS "This is SOURCE dir " ${${ProjectName}_SOURCE_DIR})
 ADD_EXECUTABLE(${ProjectName} ${SOURCES_})
 ADD_DEPENDENCIES(${ProjectName} log4cplusSD)
 TARGET_LINK_LIBRARIES(${ProjectName} log4cplusSD)
-
-
-#ADD_LIBRARY(${ProjectName} STATIC ${SOURCES_})
 
 if(WIN32)
 SET_TARGET_PROPERTIES(${ProjectName}  PROPERTIES   

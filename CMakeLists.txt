@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 PROJECT(TryEngine)
 ##ADD_SUBDIRECTORY(public)
-ADD_SUBDIRECTORY(Common)
+##ADD_SUBDIRECTORY(Common)
 ##ADD_SUBDIRECTORY(tools)
 ##ADD_SUBDIRECTORY(utils)
 

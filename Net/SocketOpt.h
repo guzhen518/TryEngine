@@ -20,16 +20,22 @@ bool Common_NetStartUP();
 bool Common_NetStopUP();
 
 //创建TCP连接
-bool Common_CreateTcpSocket(TrySocket* pTrySocket);
+bool Common_CreateTcpSocket(TrySocket& tSocket);
 
 //创建UDP连接
-bool Common_CreateUdpSocket(TrySocket* pTrySocket);
+bool Common_CreateUdpSocket(TrySocket& tSocket);
 
 //关闭SOCKET连接
 bool Common_CloseSocket(TrySocket sockHandle);
 
 //绑定ip & port
 bool Common_BindSocket(TrySocket sockHandle, const char* ip, int nPort);
+
+//设置SOCKET重复使用
+bool SetReueaddrSocket(TrySocket& tSocket);
+
+//设置SOCKET非阻塞模式
+bool SetNonBlocking(TrySocket& tSocket);
 
 
 

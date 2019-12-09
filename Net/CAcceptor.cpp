@@ -69,4 +69,32 @@ bool Common_CloseSocket(TrySocket sockHandle)
 }
 
 
+//SO_REUSEADDR
+bool SetReueaddrSocket(TrySocket& tSocket)
+{
+	int opt = 1;
+
+	int err = setsockopt(tSocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
+	if ( !err ) {
+		return false;
+	}
+
+	return true;
+
+}
+
+//设置成非阻塞模式。
+bool SetNonBlocking(TrySocket& tSocket)
+{
+	unsigned long ul = 1;
+	int ret = ioctlsocket(tSocket, FIONBIO, (unsigned long *)&ul);
+
+	if (ret == SOCKET_ERROR) {
+		return false;
+	}
+
+	return true;
+}
+
 
