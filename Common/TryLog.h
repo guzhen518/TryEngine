@@ -4,11 +4,13 @@
 #include "log4cplus/logger.h"
 #include "log4cplus/configurator.h"
 #include "log4cplus/loggingmacros.h"
-#include "log4cplus/loglevel.h"
+
 #include "log4cplus/fileappender.h"
 #include "log4cplus/ndc.h"
+#include "log4cplus/loglevel.h"
+#include "log4cplus/consoleappender.h"
 
-
+using namespace log4cplus;
 #define MY_LOG_FILE_PATH "logconfig.property"
 
 
@@ -29,12 +31,17 @@ public:
 	}
 
 
-	bool init() 
+	void init() 
 	{
 		log4cplus::initialize();
 		log4cplus::PropertyConfigurator::doConfigure(LOG4CPLUS_TEXT(MY_LOG_FILE_PATH));
 		m_rootLog = log4cplus::Logger::getRoot();
-		return true;
+		m_rootLog.setLogLevel(ALL_LOG_LEVEL);
+
+		log4cplus::SharedAppenderPtr consoleAppender(new log4cplus::ConsoleAppender);
+		consoleAppender->setName(LOG4CPLUS_TEXT("console"));
+		consoleAppender->setLayout(std::auto_ptr<log4cplus::Layout>(new log4cplus::SimpleLayout()));
+		m_rootLog.addAppender(consoleAppender);
 	}
 
 	~TryLogger() {
@@ -45,7 +52,7 @@ public:
 	void DebugLog(const std::string& strLog, const std::string strFile, int nLine)
 	{
 		std::stringstream ssLogData;
-		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog;
+		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog << "\n";
 		LOG4CPLUS_DEBUG(m_rootLog, ssLogData.str());
 	}
 
@@ -53,7 +60,7 @@ public:
 	{
 		//LOG4CPLUS_DISABLE_ERROR
 		std::stringstream ssLogData;
-		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog;
+		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog << "\n";
 		LOG4CPLUS_ERROR(m_rootLog, ssLogData.str());
 	}
 
@@ -61,7 +68,7 @@ public:
 	{
 		//LOG4CPLUS_DISABLE_ERROR
 		std::stringstream ssLogData;
-		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog;
+		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog << "\n";
 		LOG4CPLUS_INFO(m_rootLog, ssLogData.str());
 	}
 
@@ -69,7 +76,7 @@ public:
 	{
 		//LOG4CPLUS_DISABLE_ERROR
 		std::stringstream ssLogData;
-		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog;
+		ssLogData << "[" << strFile << ":" << nLine << "] " << strLog << "\n";
 		LOG4CPLUS_WARN(m_rootLog, ssLogData.str());
 	}
 

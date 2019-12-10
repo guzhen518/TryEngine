@@ -64,7 +64,7 @@ MESSAGE(STATUS "This is SOURCE dir " ${${ProjectName}_SOURCE_DIR})
 
 ADD_EXECUTABLE(${ProjectName} ${SOURCES_})
 ADD_DEPENDENCIES(${ProjectName} log4cplusSD)
-TARGET_LINK_LIBRARIES(${ProjectName} log4cplusSD)
+TARGET_LINK_LIBRARIES(${ProjectName}log4cplusSD)
 
 if(WIN32)
 SET_TARGET_PROPERTIES(${ProjectName}  PROPERTIES   
