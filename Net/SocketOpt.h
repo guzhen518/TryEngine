@@ -2,14 +2,22 @@
 #define  _LIB_COMMON_SOCKET_H_
 
 
+
+//#include "Macros.h"
+
+#ifdef _WINDOWS
 #include <WinSock2.h>
 #include <Windows.h>
 #include <IPHlpApi.h>
-//#include "Macros.h"
-
-
 #pragma comment(lib, "ws2_32.lib")
 #pragma comment(lib, "Iphlpapi.lib")
+
+#endif // _WINDOWS
+
+
+#define TYPE_CONNECTOR 0
+#define	TYPE_BROADCAST 1
+#define TYPE_LISTENER 2
 
 typedef SOCKET  TrySocket;
 
@@ -29,15 +37,20 @@ bool Common_CreateUdpSocket(TrySocket& tSocket);
 bool Common_CloseSocket(TrySocket sockHandle);
 
 //绑定ip & port
-bool Common_BindSocket(TrySocket sockHandle, const char* ip, int nPort);
+bool Common_BindSocket(TrySocket& sockHandle, const char* ip, int nPort);
+
+//监听
+bool Common_ListenSocket(TrySocket& sockHandle, int nBackLog);
+
 
 //设置SOCKET重复使用
-bool SetReueaddrSocket(TrySocket& tSocket);
+bool Common_SetReueaddrSocket(TrySocket& tSocket);
 
 //设置SOCKET非阻塞模式
-bool SetNonBlocking(TrySocket& tSocket);
+bool Common_SetNonBlocking(TrySocket& tSocket);
 
 
 
 #endif //_LIB_COMMON_SOCKET_H_
+
 

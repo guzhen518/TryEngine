@@ -1,100 +1,58 @@
-#include "SocketOpt.h"
+#include "CAcceptor.h"
 
-bool Common_NetStartUP()
+TryAcceptor::TryAcceptor(char* szAddr, int nPort, 
+	AcceptCallBack pAcceptCb, CloseCallBack pCloseCb, ReceiveCallBack pReceiveCb)
 {
-	WSADATA wsaData;
-	if ( WSAStartup(0x202, &wsaData)  != 0 )
-	{
-		return false;
-	}
+	memcpy(m_szAddr, szAddr, 32);
 
-	return true;
+	m_nPort = nPort;
+	m_AcceptCallBack = pAcceptCb;
+	m_CloseCallBack = pCloseCb;
+	m_ReciveCallBack = pReceiveCb;
+
 }
 
-bool Common_CreateTcpSocket(TrySocket* pTrySocket)
+TryAcceptor::~TryAcceptor()
 {
-	TrySocket sock = socket(AF_INET, SOCK_STREAM, 0);
-	if (INVALID_ATOM == sock )
-	{
-		return false;
-	}
 
-	*pTrySocket = sock;
 
-	return true;
 }
 
-bool Common_CreateUdpSocket(TrySocket* pTrySocket)
+bool TryAcceptor::Listen(int nBackLog)
 {
-	TrySocket sock = socket(AF_INET, SOCK_DGRAM, 0);
-	if ( INVALID_ATOM == sock )
+	//创建一个接受
+	if ( !Common_CreateTcpSocket(m_Socket) )
 	{
 		return false;
 	}
 	
-	*pTrySocket = sock;
-	return true;
-
-}
-
-
-bool Common_BindSocket(TrySocket sockHandle, const char* ip, int nPort)
-{
-	sockaddr_in addr;
-	memset(&addr, 0, sizeof(addr));
-	addr.sin_family = AF_INET;	//设置协议类型  AF_INET:V4  AF_INET6:V6
-	addr.sin_addr.s_addr = inet_addr(ip);
-	addr.sin_port = htons((u_short)nPort);
-	
-	int nResult = bind(sockHandle, (const sockaddr*)&addr, sizeof(addr));
-	if (nResult == SOCKET_ERROR )
+	//将套接字设置成阻塞
+	if ( !Common_SetNonBlocking(m_Socket) )
 	{
+		Common_CloseSocket(m_Socket);
 		return false;
 	}
 
-	return true;
-}
-
-
-bool Common_CloseSocket(TrySocket sockHandle)
-{
-
-	int result = closesocket(sockHandle);
-	if (result == SOCKET_ERROR )
+	//设置套接字为重复使用地址
+	if ( !Common_SetReueaddrSocket(m_Socket) )
 	{
+		Common_CloseSocket(m_Socket);
+		return false;
+	}
+
+	//绑定IP和端口
+	if ( !Common_BindSocket(m_Socket, m_szAddr, m_nPort) )
+	{
+		Common_CloseSocket(m_Socket);
+		return false;
+	}
+
+	//进入监听
+	if ( !Common_ListenSocket(m_Socket, nBackLog))
+	{
+		Common_CloseSocket(m_Socket);
 		return false;
 	}
 
 	return true;
 }
-
-
-//SO_REUSEADDR
-bool SetReueaddrSocket(TrySocket& tSocket)
-{
-	int opt = 1;
-
-	int err = setsockopt(tSocket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
-
-	if ( !err ) {
-		return false;
-	}
-
-	return true;
-
-}
-
-//设置成非阻塞模式。
-bool SetNonBlocking(TrySocket& tSocket)
-{
-	unsigned long ul = 1;
-	int ret = ioctlsocket(tSocket, FIONBIO, (unsigned long *)&ul);
-
-	if (ret == SOCKET_ERROR) {
-		return false;
-	}
-
-	return true;
-}
-
-
